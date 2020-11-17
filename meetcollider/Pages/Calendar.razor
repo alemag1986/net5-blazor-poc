@@ -1,0 +1,58 @@
+@page "/Calendar"
+<h3>Calendar</h3>
+
+<div class="container">
+@for (int i = 0; i < 25; i++)
+{
+    <div class="row" id="hour{@i}">
+        
+        @foreach (var date in dates)
+        {
+            if (date == new DateTime() && i != 0)
+            {
+                <div class="col-sm">
+                    @(i - 1)
+                </div>
+            }
+            else
+            {
+                
+                
+            @if (i == 0)
+            {
+                <div class="col-sm">
+                    @date.ToString("d")
+                </div>
+            }
+            else
+            {
+                <CalendarDay Title="&nbsp;"/>
+            }
+            }
+        }
+    </div>
+}
+</div>
+
+@code {
+    
+    //day 24 blocks
+    //week 7
+    DateTime initialDate = DateTime.Today;
+    
+    DateTime finalDate = DateTime.Today.AddDays(7);
+
+    private List<DateTime> dates; 
+    
+    //var dates = new DateTime(2000, 1, 1).Range(new DateTime(2000, 1, 31));
+    protected override async Task OnInitializedAsync()
+    {
+        dates = new List<DateTime>() { new DateTime() };
+
+        for (var dt = initialDate; dt <= finalDate; dt = dt.AddDays(1))
+        {
+            dates.Add(dt);
+        }
+        
+    }
+}

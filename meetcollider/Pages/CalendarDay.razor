@@ -1,0 +1,17 @@
+@page "/CalendarDay"
+
+<div class="col-sm" style="background-color: @Color" @onclick="SaveSlot">
+   @Title
+</div>
+
+@code {
+    [ParameterAttribute]
+    public string Title { get; set; }
+    
+    private string Color = "white";
+    
+    private void SaveSlot()
+    {
+        Color = Color == "white"? "blue" : "white";
+    }
+}
